@@ -1,5 +1,28 @@
-print("Welcome to the tip calculator")
-cost = input("Enter cost of service: ")
-tip = float(cost) * 0.15
-print("Your tip amount is:", round(tip, 2))
-print(f"The total cost is {round(tip + float(cost), 2)}")
+from pipenv.utils import console
+
+print("Welcome to bidding auction!")
+dict = {}
+maximum = 0
+highest_bidder = ""
+answer = "y"
+# name = input("Please enter your name: ")
+# dict[name] = float(input("Please enter your bid: "))
+#
+# answer = input("Are there other bidders? y/N ").lower()
+
+while answer != "n":
+    name = input("Please enter your name: ")
+    dict[name] = float(input("Please enter your bid: "))
+    answer = input("Are there other bidders? y/N ").lower()
+    console.clear() #does not work
+
+
+for entry in dict.keys():
+    if dict[entry] > maximum:
+        maximum = dict[entry]
+        highest_bidder = entry
+
+
+
+
+print(f"The highest bidder with ${round(maximum, 2)} is {highest_bidder}!")
