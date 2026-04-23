@@ -1,4 +1,4 @@
-from pipenv.utils import console
+import os
 
 print("Welcome to bidding auction!")
 dict = {}
@@ -14,7 +14,8 @@ while answer != "n":
     name = input("Please enter your name: ")
     dict[name] = float(input("Please enter your bid: "))
     answer = input("Are there other bidders? y/N ").lower()
-    console.clear() #does not work
+
+    print("\n" * 50)
 
 
 for entry in dict.keys():
