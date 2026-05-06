@@ -1,12 +1,13 @@
 import resources as res
 import money_machine as money
-import main
 
+machine_is_running = True
 
 def coffee_maker():
     choice = input("What would you like? (espresso/latte/cappuccino):")
     if choice == "off":
-        main.machine_is_running = False
+        global machine_is_running
+        machine_is_running = False
     elif choice == "report":
         print(f"Water: {res.resources['water']}")
         print(f"Milk: {res.resources['milk']}")
