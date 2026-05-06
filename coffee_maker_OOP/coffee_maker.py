@@ -30,7 +30,28 @@ resources = {
     "coffee": 100,
 }
 
+total_earnings = 0.0
 machine_is_running = True
+
+def money_machine(choice):
+    if choice == "espresso":
+        print(f"Espresso: ${MENU.get('espresso')['cost']}")
+    elif choice == "latte":
+        print(f"Latte: ${MENU.get('latte')['cost']}")
+    elif choice == "cappuccino":
+        print(f"Cappuccino: ${MENU.get('cappuccino')['cost']}")
+    pennies = float(input("How many pennies? ")) * 0.01
+    nickels = float(input("How many nickels? ")) * 0.05
+    dimes = float(input("How many dimes? ")) * 0.10
+    quarters = float(input("How many quarters? ")) * 0.25
+    total_inserted = pennies + nickels + dimes + quarters
+    if total_inserted >= MENU[choice]['cost']:
+        print(f"Thank you for your purchase! Enjoy your {choice}")
+        global total_earnings
+        total_earnings += MENU[choice]['cost']
+        print(f"Money returned in change: ${total_inserted - MENU[choice]['cost']}")
+    else:
+        print("Sorry, you don't have enough money! Money refunded.")
 
 def calculate_resources(choice):
     if choice == "espresso":
@@ -71,13 +92,18 @@ def calculate_resources(choice):
 
 
 
-def coffee_maker(choice):
+def coffee_maker():
     choice = input("What would you like? (espresso/latte/cappuccino):")
     if choice == "off":
-        return False
+        global machine_is_running
+        machine_is_running = False
     elif choice == "report":
+        global total_earnings
         print(f"Water: {resources['water']}")
         print(f"Milk: {resources['milk']}")
         print(f"Coffee: {resources['coffee']}")
-    elif choice == "espresso":
-        ...
+        print(f"Earnings: ${total_earnings}")
+    else:
+        calculate_resources(choice)
+        money_machine(choice)
+
